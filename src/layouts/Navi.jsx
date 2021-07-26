@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Menu, Container, Input, Icon } from 'semantic-ui-react'
 import SignedOut from './SignedOut'
 import SignedIn from './SignedIn'
+import { Link } from 'react-router-dom'
 
 
 export default function Navi() {
@@ -9,15 +10,17 @@ export default function Navi() {
   function handleSignOut(params) {
     setIsAuthenticated(false)
   }
+  
   function handleSignIn(params) {
     setIsAuthenticated(true)
   }
   return (
     <div>
-      <Menu color='blue' inverted size='massive' fixed="top">
+      <Menu  size='massive' fixed="top" className="navi">
         <Container>
-
-          <Icon name='handshake' size='huge' color='teal' inverted />
+          <Menu.Item as={Link} to="/">
+            <Icon name='handshake' size='big' color='teal' inverted />
+          </Menu.Item>
           <Container>
             <Menu.Item>
               <Input action='Ara' placeholder='Posizyon, Şehir veya Şirket' style={{ marginTop: '0.005em' }} />
@@ -29,7 +32,6 @@ export default function Navi() {
         </Container>
 
       </Menu>
-
     </div>
   )
 }

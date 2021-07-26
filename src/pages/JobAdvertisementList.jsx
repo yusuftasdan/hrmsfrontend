@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import JobAdvertisementService from '../services/JobAdvertisementService'
-import { Table } from 'semantic-ui-react'
+import { Item, Card, Label, Icon } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 export default function JobAdvertisementList() {
     const [jobAdvertisements, setjobAdvertisements] = useState([])
@@ -12,31 +13,33 @@ export default function JobAdvertisementList() {
     }, [])
     return (
         <div>
-            <Table color='blue' celled fixed>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Pozisyon</Table.HeaderCell>
-                        <Table.HeaderCell>Şehir</Table.HeaderCell>
-                        <Table.HeaderCell>Şirket</Table.HeaderCell>
-                        <Table.HeaderCell>Yayınlanma Tarihi</Table.HeaderCell>
-                        <Table.HeaderCell>Son Başvuru Tarihi</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                    {
-                        jobAdvertisements.map((jobAdvertisement) => (
-                            <Table.Row key={jobAdvertisement.id}>
-                                <Table.Cell>{jobAdvertisement.jobTitleTitle}</Table.Cell>
-                                <Table.Cell>{jobAdvertisement.cityCityName}</Table.Cell>
-                                <Table.Cell>{jobAdvertisement.employerCompanyName}</Table.Cell>
-                                <Table.Cell>{jobAdvertisement.creatingDate}</Table.Cell>
-                                <Table.Cell>{jobAdvertisement.endingDate}</Table.Cell>
-                            </Table.Row>
-                        ))
-                    }
-                </Table.Body>
-            </Table>
+            {
+                jobAdvertisements.map((jobAdvertisement) => (
+                    <Card fluid key={jobAdvertisement.id} as={Link} to={`/jobAdvertisements/${jobAdvertisement.id}`}>
+                        <Card.Content textAlign="left">
+                            <Item>
+                                <Item.Content>
+                                    <Item.Header as='b'>{jobAdvertisement.jobTitleTitle}</Item.Header>
+                                </Item.Content>
+                                <Item.Content>
+                                    <Item.Meta>{jobAdvertisement.employerCompanyName}</Item.Meta>
+                                    <Item.Description>{jobAdvertisement.cityCityName}</Item.Description>
+                                    <Item.Extra>
+                                        <Label>
+                                            <Icon name="calendar" />
+                                            <Label.Detail>{jobAdvertisement.creatingDate}</Label.Detail>
+                                        </Label>
+                                        <Label>
+                                            <Icon name="calendar outline" />
+                                            <Label.Detail>{jobAdvertisement.endingDate}</Label.Detail>
+                                        </Label>
+                                    </Item.Extra>
+                                </Item.Content>
+                            </Item>
+                        </Card.Content>
+                    </Card>
+                ))
+            }
         </div>
     )
 }

@@ -18,7 +18,7 @@ export default function JobAdvertisementFilter() {
                     <Input placeholder='Şirket...' />
                 </Menu.Item>
 
-                <Button size='medium' color='green' fluid>Filtrele</Button>
+                <Button size='medium' color='green' fluid>ARA</Button>
 
             </Menu>
         </div>
